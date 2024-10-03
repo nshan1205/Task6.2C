@@ -46,12 +46,10 @@ pipeline {
     }
     post {
         success {
-            mail body: 'Attached the build log', subject: '6.2C build Successful', to: 'grnshan12@gmail.com
-'
+            mail body: 'Attached the build log', subject: '6.2C build Successful', to: 'grnshan12@gmail.com'
         }
         failure {
-            mail body: 'Attached the build log', subject: '6.2C build Failure', to: 'grnshan12@gmail.com
-'
+            mail body: 'Attached the build log', subject: '6.2C build Failure', to: 'grnshan12@gmail.com'
         }
     }
 }
