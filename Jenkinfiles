@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    environment {
+        DIRECTORY_PATH = '/path/to/code'
+        TESTING_ENVIRONMENT = 'Staging'
+        PRODUCTION_ENVIRONMENT = 'nshang-Production'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo "Build : Fetch the source code from the directory path specified by the environment variable: ${env.DIRECTORY_PATH}"
+                echo "Building using Maven"
+            }
+        }
+        stage('Unit and Integration Tests') {
+            steps {
+                echo "Test : Running unit tests in JUNIT"
+                echo "Test : Running integration tests in MOCKITO"
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                echo "Quality of code: Veracode can be used to check the code quality."
+            }
+        }
+        stage('Security Scan') {
+            steps {
+                echo "running BurpSuite's security scan."
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                echo "deploy the application to AWS EC2 instance"
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "executing the Maven integration tests to make sure the application performs as intended"
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                echo "Install the program on an AWS EC2 instance."
+            }
+        }
+    }
+    post {
+        success {
+            mail body: 'Attached the build log', subject: '6.2C build Successful', to: 'grnshan12@gmail.com
+'
+        }
+        failure {
+            mail body: 'Attached the build log', subject: '6.2C build Failure', to: 'grnshan12@gmail.com
+'
+        }
+    }
+}
